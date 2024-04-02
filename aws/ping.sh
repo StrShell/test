@@ -1,5 +1,5 @@
 #!/bin/bash
-cat /nfs-server/list.txt |  while read output
+cat /nfs-shared/list.txt |  while read output
 do
     ping -c 1 -W 1 "$output" > /dev/null
     if [ $? -eq 0 ]; then
