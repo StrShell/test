@@ -8,7 +8,8 @@ EOF
 
 sysctl -p /etc/sysctl.conf
 
-left=$(ec2-metadata -v | cut -d ' ' -f 2)
+left=$(head -n 1 /IPs.txt)
+right=$(head -n 2 /IPs.txt)
 
 cat <<EOF > /etc/ipsec.d/aws.conf
 conn Tunnel1
@@ -37,3 +38,5 @@ $left $right: PSK "password"
 
 systemctl start ipsec
 systemctl enable ipsec
+
+rm -rf /IPs.txt
