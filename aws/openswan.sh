@@ -8,13 +8,15 @@ EOF
 
 sysctl -p /etc/sysctl.conf
 
+left=$(ec2-metadata -v | cut -d ' ' -f 2)
+
 cat <<EOF > /etc/ipsec.d/aws.conf
 conn Tunnel1
 	authby=secret
 	auto=start
 	left=%defaultroute
-	leftid=52.78.82.59
-	right=13.124.200.153
+	leftid=$left
+	right=$right
 	type=tunnel
 	ikelifetime=8h
 	keylife=1h
